@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "Dios Derivatives",
+    "slug": "dios-derivatives",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/dios-icon.png",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/dios-splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true,
+          "NSAllowsLocalNetworking": true
+        }
+      },
+      "bundleIdentifier": "com.diosderivatives.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/dios-icon.png",
+        "backgroundColor": "#000000"
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "com.diosderivatives.app"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-font"
+    ]
+  }
+}
