@@ -4,11 +4,11 @@
     "slug": "dios-derivatives",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/dios-icon.png",
+    "icon": "./assets/DiosDerivativelogowhite.png",
     "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/dios-splash.png",
+      "image": "./assets/DiosDerivativelogowhite.png",
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
@@ -24,7 +24,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/dios-icon.png",
+        "foregroundImage": "./assets/DiosDerivativelogowhite.png",
         "backgroundColor": "#000000"
       },
       "edgeToEdgeEnabled": true,
