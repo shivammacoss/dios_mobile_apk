@@ -2736,7 +2736,7 @@ const TradeTab = () => {
         </View>
         <View style={styles.summaryRow}>
           <Text style={[styles.summaryLabel, { color: colors.textMuted }]}>Credit</Text>
-          <Text style={[styles.summaryValue, { color: colors.textPrimary }]}>{(ctx.accountSummary.credit || 0).toFixed(2)}</Text>
+          <Text style={[styles.summaryValue, { color: colors.textPrimary }]}>{(ctx.accountSummary.credit || (ctx.isChallengeMode ? ctx.selectedChallengeAccount?.credit : ctx.selectedAccount?.credit) || 0).toFixed(2)}</Text>
         </View>
         <View style={styles.summaryRow}>
           <Text style={[styles.summaryLabel, { color: colors.textMuted }]}>Used Margin</Text>
