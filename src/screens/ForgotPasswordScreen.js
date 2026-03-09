@@ -12,6 +12,7 @@ import {
   Platform,
   StatusBar,
   Dimensions,
+  Image,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { API_URL } from '../config';
@@ -254,11 +255,13 @@ const ForgotPasswordScreen = ({ navigation }) => {
           <Text style={styles.backText}>Back</Text>
         </TouchableOpacity>
 
-        {/* Icon */}
-        <View style={styles.iconContainer}>
-          <View style={styles.iconCircle}>
-            <Ionicons name="lock-open-outline" size={40} color="#2563eb" />
-          </View>
+        {/* Logo */}
+        <View style={styles.logoContainer}>
+          <Image 
+            source={require('../../assets/appicondios.png')} 
+            style={styles.logoImage}
+            resizeMode="contain"
+          />
         </View>
 
         <Text style={styles.title}>Forgot Password</Text>
@@ -337,17 +340,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginLeft: 8,
   },
-  iconContainer: {
+  logoContainer: {
     alignItems: 'center',
     marginBottom: 24,
   },
-  iconCircle: {
+  logoImage: {
     width: 80,
     height: 80,
-    borderRadius: 40,
-    backgroundColor: '#2563eb20',
-    justifyContent: 'center',
-    alignItems: 'center',
+    borderRadius: 16,
   },
   title: {
     fontSize: 28,

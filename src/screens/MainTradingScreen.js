@@ -324,7 +324,7 @@ const TradingProvider = ({ children, navigation, route }) => {
     socketService.connect();
     
     // Subscribe to price updates via WebSocket - tick-to-tick for fastest updates
-    const unsubscribe = socketService.addPriceListener((prices) => {
+    const unsubscribePrices = socketService.addPriceListener((prices) => {
       if (prices && Object.keys(prices).length > 0) {
         // Tick-to-tick updates - immediate state update for fastest price display
         setLivePrices(prev => ({ ...prev, ...prices }));
@@ -337,6 +337,17 @@ const TradingProvider = ({ children, navigation, route }) => {
           }
           return inst;
         }));
+      }
+    });
+    
+    // Subscribe to trade updates - refresh balance/equity when trade closes
+    const unsubscribeTrades = socketService.addTradeListener((data) => {
+      console.log('[Socket] Trade update received:', data?.type);
+      if (data?.type === 'TRADE_CLOSED' || data?.type === 'TRADE_CLOSE' || data?.status === 'CLOSED') {
+        // Trade was closed - refresh open trades, history and account summary
+        fetchOpenTrades();
+        fetchTradeHistory();
+        fetchAccountSummary();
       }
     });
     
@@ -353,7 +364,8 @@ const TradingProvider = ({ children, navigation, route }) => {
     }, 2000);
     
     return () => {
-      unsubscribe();
+      unsubscribePrices();
+      unsubscribeTrades();
       clearInterval(newsInterval);
       clearInterval(slTpInterval);
     };
@@ -910,12 +922,16 @@ const HomeTab = ({ navigation }) => {
     return withChanges.slice(0, 8);
   };
 
-  // Refresh accounts when screen gains focus (e.g., after creating new account)
+  // Refresh accounts and balance when screen gains focus (e.g., after trade close)
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       if (ctx.refreshAccounts) {
         ctx.refreshAccounts();
       }
+      // Refresh balance/equity when returning to this screen
+      ctx.fetchAccountSummary();
+      ctx.fetchOpenTrades();
+      ctx.fetchTradeHistory();
       fetchMasters();
       fetchMySubscriptions();
     });

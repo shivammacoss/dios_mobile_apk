@@ -184,7 +184,7 @@ const IBScreen = ({ navigation }) => {
 
   const copyReferralLink = async () => {
     if (ibProfile?.referralCode) {
-      const link = `https://yourapp.com/signup?ref=${ibProfile.referralCode}`;
+      const link = `https://diosderivative.com/signup?ref=${ibProfile.referralCode}`;
       await Clipboard.setStringAsync(link);
       Alert.alert('Copied!', 'Referral link copied to clipboard');
     }
@@ -194,7 +194,7 @@ const IBScreen = ({ navigation }) => {
     if (ibProfile?.referralCode) {
       try {
         await Share.share({
-          message: `Join me on this amazing trading platform! Use my referral code: ${ibProfile.referralCode}\n\nSign up here: https://yourapp.com/signup?ref=${ibProfile.referralCode}`,
+          message: `Join me on this amazing trading platform! Use my referral code: ${ibProfile.referralCode}\n\nSign up here: https://diosderivative.com/signup?ref=${ibProfile.referralCode}`,
         });
       } catch (e) {
         console.error('Error sharing:', e);
@@ -359,7 +359,7 @@ const IBScreen = ({ navigation }) => {
             <View style={styles.referralLinkCard}>
               <Text style={styles.referralLinkLabel}>Your Referral Link</Text>
               <Text style={styles.referralLinkText} numberOfLines={1}>
-                https://yourapp.com/signup?ref={ibProfile?.referralCode}
+                https://diosderivative.com/signup?ref={ibProfile?.referralCode}
               </Text>
               <Text style={styles.referralCodeText}>Code: <Text style={styles.referralCodeBold}>{ibProfile?.referralCode}</Text></Text>
               <View style={styles.referralActions}>

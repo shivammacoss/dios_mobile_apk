@@ -108,19 +108,29 @@ const OrderBookScreen = ({ navigation }) => {
     }
   }, [selectedAccount, accounts.length, challengeAccounts.length]);
 
-  // WebSocket for real-time price updates
+  // WebSocket for real-time price updates and trade updates
   useEffect(() => {
     // Connect to WebSocket if not already connected
     socketService.connect();
     
     // Subscribe to price updates
-    const unsubscribe = socketService.addPriceListener((prices) => {
+    const unsubscribePrices = socketService.addPriceListener((prices) => {
       if (prices && Object.keys(prices).length > 0) {
         setLivePrices(prices);
       }
     });
     
-    return () => unsubscribe();
+    // Subscribe to trade updates - refresh trades when any trade closes
+    const unsubscribeTrades = socketService.addTradeListener((data) => {
+      if (data?.type === 'TRADE_CLOSED' || data?.type === 'TRADE_CLOSE' || data?.status === 'CLOSED') {
+        fetchAllTrades();
+      }
+    });
+    
+    return () => {
+      unsubscribePrices();
+      unsubscribeTrades();
+    };
   }, []);
 
   // Optimized: Fetch trades for given accounts list

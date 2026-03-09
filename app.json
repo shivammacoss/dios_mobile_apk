@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "Dios Derivatives",
+    "name": "Dios Derivative",
     "slug": "dios-derivatives",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/DiosDerivativelogowhite.png",
+    "icon": "./assets/appicondios.png",
     "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/DiosDerivativelogowhite.png",
+      "image": "./assets/appicondios.png",
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
@@ -20,22 +20,30 @@
           "NSAllowsLocalNetworking": true
         }
       },
-      "bundleIdentifier": "com.diosderivatives.app"
+      "bundleIdentifier": "com.diosderivative.app"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/DiosDerivativelogowhite.png",
+        "foregroundImage": "./assets/appicondios.png",
         "backgroundColor": "#000000"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.diosderivatives.app"
+      "package": "com.diosderivative.app"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-font"
+      "expo-font",
+      "expo-updates"
     ],
+    "updates": {
+      "enabled": true,
+      "url": "https://u.expo.dev/3bef3b4e-6f9a-4e52-bf9e-67289ae7259d"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
     "extra": {
       "eas": {
         "projectId": "3bef3b4e-6f9a-4e52-bf9e-67289ae7259d"

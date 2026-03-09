@@ -122,11 +122,11 @@ const LoginScreen = ({ navigation }) => {
         {/* Logo */}
         <View style={styles.logoContainer}>
           <Image 
-            source={require('../../assets/dios-splash.png')} 
+            source={require('../../assets/appicondios.png')} 
             style={styles.logoImage}
             resizeMode="contain"
           />
-          <Text style={styles.brandName}>Dios Derivatives</Text>
+          <Text style={styles.brandName}>Dios Derivative</Text>
         </View>
 
         {/* Tab Switcher */}
