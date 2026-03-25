@@ -340,13 +340,17 @@ const TradingProvider = ({ children, navigation, route }) => {
       }
     });
     
-    // Subscribe to trade updates - refresh balance/equity when trade closes
+    // Subscribe to trade updates - refresh balance/equity when trade opens or closes
     const unsubscribeTrades = socketService.addTradeListener((data) => {
       console.log('[Socket] Trade update received:', data?.type);
       if (data?.type === 'TRADE_CLOSED' || data?.type === 'TRADE_CLOSE' || data?.status === 'CLOSED') {
         // Trade was closed - refresh open trades, history and account summary
         fetchOpenTrades();
         fetchTradeHistory();
+        fetchAccountSummary();
+      } else if (data?.type === 'TRADE_OPENED' || data?.type === 'TRADE_OPEN' || data?.status === 'OPEN') {
+        // Trade was opened - refresh open trades and account summary
+        fetchOpenTrades();
         fetchAccountSummary();
       }
     });
@@ -1801,9 +1805,12 @@ const QuotesTab = ({ navigation }) => {
         setPendingPrice('');
         setStopLoss('');
         setTakeProfit('');
-        ctx.fetchOpenTrades();
-        ctx.fetchPendingOrders();
-        ctx.fetchAccountSummary();
+        // Immediate refresh after trade placement
+        await Promise.all([
+          ctx.fetchOpenTrades(),
+          ctx.fetchPendingOrders(),
+          ctx.fetchAccountSummary()
+        ]);
       } else {
         console.error('Trade failed:', data.message);
         // Handle challenge-specific error codes
